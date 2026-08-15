@@ -1,6 +1,7 @@
 from fastapi import FastAPI
-from database import Base, engine
-from routers import books, users, read_books
+
+from backend.database import Base, engine
+from backend.routers import books, read_books, users
 
 Base.metadata.create_all(bind=engine)
 

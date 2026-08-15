@@ -10,8 +10,8 @@ dependencies = [
   "fastapi>=0.141.1",
   "sqlalchemy>=2.0.51",
   "pydantic>=2.13.4",
-  "jwt>=1.4.0",
-  "passlib>=1.7.4"
+  "passlib>=1.7.4",
+  "pyjwt>=2.13.0",
 ]
 
 [project.optional-dependencies]

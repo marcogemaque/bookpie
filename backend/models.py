@@ -1,5 +1,6 @@
-from database import Base
 from sqlalchemy import JSON, Boolean, Column, DateTime, ForeignKey, Integer, String
+
+from backend.database import Base
 
 
 class Book(Base):
