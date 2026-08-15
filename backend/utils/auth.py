@@ -1,11 +1,15 @@
 # auth.py
+import os
 from datetime import datetime, timedelta, timezone
 
 import jwt
+from dotenv import load_dotenv
 from passlib.context import CryptContext
 
-SECRET_KEY = "your-secret-key"
-ALGORITHM = "HS256"
+load_dotenv()
+
+SECRET_KEY = os.environ["SECRET_KEY"]
+ALGORITHM = os.environ["ALGORITHM"]
 
 def create_access_token(data: dict):
     to_encode = data.copy()
