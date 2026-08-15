@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bookworm - Login</title>
+    <title>Bookpie - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/styles.css">
 </head>
 <body>
     <div id="root"></div>
@@ -35,23 +38,19 @@
             if (token) return <h2>Logged in! Token: {token}</h2>
 
             return (
-                <div>
-                    <h1>Bookworm</h1>
-                    <input
-                        placeholder="Username"
-                        value={username}
-                        onChange={e => setUsername(e.target.value)}
-                    />
-                    <br />
-                    <input
-                        placeholder="Password"
-                        type="password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                    <br />
-                    <button onClick={handleLogin}>Login</button>
-                    {error && <p style={{color: "red"}}>{error}</p>}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '3rem', flexWrap: 'wrap', background: 'var(--gold)'}}>
+                    <div>
+                        <div className="cover-brand">
+                            <h1>Book<em>worm</em></h1>
+                        </div>
+                        <input placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
+                        <br />
+                            <input placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                        <br />
+                        <button onClick={handleLogin}>Login</button>
+                        {error && <p style={{color: "red"}}>{error}</p>}
+                    </div>
+                    <img src="../images/logo.png" alt="Logo for Bookpie" style={{ width: '350px' }} />
                 </div>
             )
         }
