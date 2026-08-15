@@ -7,6 +7,7 @@ class BookBase(BaseModel):
     title: str
     cover_img: str | None = None
     author: list
+    genre: list
 
 class BookCreate(BookBase):
     pass
@@ -53,6 +54,7 @@ class ReadBookOut(ReadBookBase):
     finished: bool
     started_date: datetime | None
     finished_date: datetime | None
+    notes: list
 
     class Config:
         from_attributes = True

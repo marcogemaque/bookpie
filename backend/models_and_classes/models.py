@@ -1,6 +1,6 @@
 from sqlalchemy import JSON, Boolean, Column, DateTime, ForeignKey, Integer, String
 
-from backend.database import Base
+from backend.utils.database import Base
 
 
 class Book(Base):
@@ -10,6 +10,7 @@ class Book(Base):
     title = Column(String, nullable=False)
     cover_img = Column(String)
     author = Column(JSON)
+    genre = Column(JSON)
 
 class User(Base):
     __tablename__ = "user"
@@ -30,3 +31,4 @@ class ReadBooks(Base):
     started_data = Column(DateTime)
     finished = Column(Boolean, default=False)
     finished_data = Column(DateTime)
+    notes = Column(JSON, default=None)
