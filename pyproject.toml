@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "bookworm"
+version = "0.0.b2"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.141.1",
+  "sqlalchemy>=2.0.51",
+  "pydantic>=2.13.4",
+  "jwt>=1.4.0",
+  "passlib>=1.7.4"
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["backend"]

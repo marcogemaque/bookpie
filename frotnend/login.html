@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookworm - Login</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="config.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React
+
+        function Login() {
+            const [username, setUsername] = useState("")
+            const [password, setPassword] = useState("")
+            const [error, setError] = useState(null)
+            const [token, setToken] = useState(null)
+
+            async function handleLogin() {
+                try {
+                    const res = await axios.post(`${API_BASE_URL}/users/login`, {
+                        username,
+                        password
+                    })
+                    setToken(res.data.access_token)
+                    setError(null)
+                } catch (err) {
+                    setError("Invalid credentials")
+                }
+            }
+
+            if (token) return <h2>Logged in! Token: {token}</h2>
+
+            return (
+                <div>
+                    <h1>Bookworm</h1>
+                    <input
+                        placeholder="Username"
+                        value={username}
+                        onChange={e => setUsername(e.target.value)}
+                    />
+                    <br />
+                    <input
+                        placeholder="Password"
+                        type="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                    <br />
+                    <button onClick={handleLogin}>Login</button>
+                    {error && <p style={{color: "red"}}>{error}</p>}
+                </div>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<Login />)
+    </script>
+</body>
+</html>
