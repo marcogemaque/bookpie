@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class BookBase(BaseModel):
@@ -20,7 +20,6 @@ class BookOut(BookBase):
 
 class UserBase(BaseModel):
     username: str
-    created_at: datetime
 
     class Config:
         from_attributes = True
@@ -30,7 +29,8 @@ class UserCreate(UserBase):
 
 class UserOut(UserBase):
     user_id: int
-    role: str #unsure about this one yet
+    role: str
+    created_at: datetime
 
 class UserLogin(BaseModel):
     username: str
@@ -55,6 +55,16 @@ class ReadBookOut(ReadBookBase):
     started_date: datetime | None
     finished_date: datetime | None
     notes: list
+
+    class Config:
+        from_attributes = True
+
+class NoteCreate(BaseModel):
+    content: str = Field(max_length=250)
+
+class NoteOut(NoteCreate):
+    note_id: int
+    created_at: datetime
 
     class Config:
         from_attributes = True
