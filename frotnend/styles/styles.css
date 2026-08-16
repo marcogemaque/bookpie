@@ -182,26 +182,24 @@
             color: #6b6455;
             margin-bottom: 0.45rem;
         }
- 
-        .field input {
+
+        input {
             width: 100%;
-            padding: 0.75rem 1rem;
-            background: white;
-            border: 1.5px solid var(--parch-mid);
-            border-radius: 3px;
+            padding: 0.6rem 0.3rem;
+            margin-bottom: 0.15rem;
+            background: var(--parchment);
+            border: 2px solid var(--ink);
+            border-radius: 600px;
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             color: var(--ink);
             outline: none;
-            transition: border-color 0.15s, box-shadow 0.15s;
         }
- 
-        .field input:focus {
+
+        input:focus {
             border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.3);
         }
- 
-        .field input::placeholder { color: #b8b0a4; }
  
         .btn-login {
             width: 100%;
