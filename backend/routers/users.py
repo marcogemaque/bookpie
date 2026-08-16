@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from backend.models_and_classes.models import User
@@ -8,16 +9,22 @@ from backend.utils.dependencies import get_db
 
 router = APIRouter(prefix="/users", tags=["users"])
 
-@router.post("/register", response_model=UserCreate)
+@router.post("/register", response_model=UserOut)
 def create_user(user: UserCreate, db: Session = Depends(get_db)): # noqa: B008
-    db_user = User(
-        username=user.username,
-        password=Auth.hash_password(user.password)  # hash before storing
-    )
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    return db_user
+    try:
+        db_user = User(
+            username=user.username,
+            password=Auth.hash_password(user.password)  # hash before storing
+        )
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+        return db_user
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=409, detail="Username already exists")
+    except Exception as e: 
+        raise e  # noqa: TRY201
 
 @router.get("/me", response_model=list[UserOut])
 def get_user(db: Session = Depends(get_db)): # noqa: B008
