@@ -1,6 +1,7 @@
 from datetime import datetime
+import re
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class BookBase(BaseModel):
@@ -26,6 +27,13 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
+
+    @field_validator("password")
+    @classmethod
+    def strong_password(cls, v):
+        if len(v.replace(" ","")) < 12:
+            raise ValueError("Password must be at least 12 characters")
+        return v
 
 class UserOut(UserBase):
     user_id: int

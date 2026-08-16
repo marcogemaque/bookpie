@@ -34,7 +34,7 @@ def get_user(db: Session = Depends(get_db)): # noqa: B008
 def login(credentials: UserLogin, db: Session = Depends(get_db)): # noqa: B008
     user = db.query(User).filter(User.username == credentials.username).first()
     
-    if not user or not Auth.verify_password(credentials.password, user.password_hash):
+    if not user or not Auth.verify_password(credentials.password, user.password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
     token = Auth.create_access_token({"sub": user.username})
