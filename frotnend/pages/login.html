@@ -38,7 +38,7 @@
             if (token) return <h2>Logged in! Token: {token}</h2>
 
             return (
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '3rem', flexWrap: 'wrap', background: 'var(--gold)'}}>
+                <div style={{ display: 'flex', width: '260px', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', gap: '3rem', flexWrap: 'wrap', background: 'var(--gold)'}}>
                     <div>
                         <div className="cover-brand">
                             <h1>Book<em>worm</em></h1>
@@ -48,12 +48,18 @@
                         <button onClick={handleLogin}>Login</button>
                         {error && <p style={{color: "red"}}>{error}</p>}
                     </div>
-                    <div style={{ textAlign: 'center', maxWidth: '350px' }}>
+                    <div style={{ textAlign: 'center', maxWidth: '350px', textAlign: 'center', width: '260px' }}>
                         <img src="../images/logo.png" alt="Logo for Bookpie" style={{ width: '350px' }} />
                         <div style={{ marginTop: '0.25rem' }}>
-                            <p>For casual readers.</p>
-                            <p>For serious readers.</p>
-                            <p>For readers.</p>
+                            <p style={{ fontStyle: 'italic', color: '#6b6455' }}>
+                                "For casual readers. For serious readers.
+                            </p>
+                            <p style={{ fontStyle: 'italic', fontWeight: 700, color: '#6b6455' }}>
+                                For readers".
+                            </p>
+                            <p style={{ fontSize: '0.8rem', marginTop: '0.5rem', color: '#000000' }}>
+                                Keep notes on your books, Track your reading, discover new content. All in one place.
+                            </p>
                         </div>
                     </div>
                 </div>
