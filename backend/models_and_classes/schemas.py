@@ -1,7 +1,7 @@
+# import re will use this eventually
 from datetime import datetime
-import re
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class BookBase(BaseModel):
@@ -26,6 +26,7 @@ class UserBase(BaseModel):
         from_attributes = True
 
 class UserCreate(UserBase):
+    model_config = ConfigDict(hide_input_in_errors=True)
     password: str
 
     @field_validator("password")
