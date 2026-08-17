@@ -30,12 +30,12 @@
                     })
                     setToken(res.data.access_token)
                     setError(null)
+                    localStorage.setItem("token", res.data.access_token)
+                    window.location.href = "/dashboard.html"
                 } catch (err) {
                     setError("Invalid credentials")
                 }
             }
-
-            if (token) return <h2>Logged in! Token: {token}</h2>
 
             return (
                 <div style={{ display: 'flex', width: '260px', alignItems: 'center', justifyContent: 'center', minHeight: '25vh', gap: '1rem', flexWrap: 'wrap', background: 'var(--gold)'}}>
