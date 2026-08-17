@@ -45,6 +45,7 @@ class UserCreate(UserBase):
     def strong_password(cls, v):
         if len(v.replace(" ","")) < 12:
             raise ValueError("Password must be at least 12 characters")
+        return v
 
 class UserOut(UserBase):
     user_id: int
