@@ -1,4 +1,5 @@
 # import re will use this eventually
+import re
 from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
@@ -22,11 +23,21 @@ class BookOut(BookBase):
 class UserBase(BaseModel):
     username: str
 
-    class Config:
-        from_attributes = True
+    @field_validator("username")
+    @classmethod
+    def validate_username(cls, v):
+        v = v.strip()
+        if not v:
+            raise ValueError("Username cannot be blank")
+        if len(v) < 3:
+            raise ValueError("Username must be at least 3 characters")
+        if len(v) > 30:
+            raise ValueError("Username must be at most 30 characters")
+        if not re.match(r"^[a-zA-Z][a-zA-Z0-9_-]*$", v):
+            raise ValueError("Username must start with a letter and contain only letters, numbers, _ or -")
+        return v
 
 class UserCreate(UserBase):
-    model_config = ConfigDict(hide_input_in_errors=True)
     password: str
 
     @field_validator("password")
@@ -34,7 +45,6 @@ class UserCreate(UserBase):
     def strong_password(cls, v):
         if len(v.replace(" ","")) < 12:
             raise ValueError("Password must be at least 12 characters")
-        return v
 
 class UserOut(UserBase):
     user_id: int

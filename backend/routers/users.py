@@ -23,8 +23,6 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)): # noqa: B008
     except IntegrityError:
         db.rollback()
         raise HTTPException(status_code=409, detail="Username already exists")
-    except Exception as e: 
-        raise e  # noqa: TRY201
 
 @router.get("/me", response_model=list[UserOut])
 def get_user(db: Session = Depends(get_db)): # noqa: B008
