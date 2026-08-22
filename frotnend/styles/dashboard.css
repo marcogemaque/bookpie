@@ -1,0 +1,267 @@
+body {
+    background: var(--parchment);
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+/* ── Top nav ── */
+
+.dash-nav {
+    background: var(--ink-mid);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--gold);
+}
+
+.dash-nav .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--parchment);
+}
+
+.dash-nav .brand em {
+    font-style: italic;
+    color: var(--gold);
+}
+
+.dash-nav .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dash-nav .nav-username {
+    font-size: 0.8rem;
+    color: var(--parch-mid);
+    letter-spacing: 0.05em;
+}
+
+.btn-logout {
+    padding: 0.35rem 1rem;
+    font-size: 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--gold);
+    background: transparent;
+    color: var(--gold);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn-logout:hover {
+    background: var(--gold);
+    color: var(--ink);
+}
+
+/* ── Main layout ── */
+
+.dash-main {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    height: calc(100vh - 56px);
+    overflow: hidden;
+}
+
+/* ── Sidebar ── */
+
+.dash-sidebar {
+    background: var(--ink);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    overflow-y: auto;
+}
+
+.sidebar-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0.6;
+    padding: 1rem 0.5rem 0.4rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--parch-mid);
+    cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    border: none;
+    background: transparent;
+    text-align: left;
+    width: 100%;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    background: rgba(201,168,76,0.12);
+    color: var(--parchment);
+}
+
+.sidebar-link.active {
+    border-left: 2px solid var(--gold);
+    padding-left: calc(0.75rem - 2px);
+}
+
+/* ── Content area ── */
+
+.dash-content {
+    padding: 2rem;
+    overflow-y: auto;
+    background: var(--parchment);
+}
+
+/* ── Stats bar ── */
+
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: var(--parch-mid);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    border-top: 3px solid var(--gold);
+}
+
+.stat-card .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+}
+
+.stat-card .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b6455;
+    margin-top: 0.3rem;
+}
+
+/* ── Section headings ── */
+
+.section-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--parch-mid);
+}
+
+/* ── Book cards ── */
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.book-tile {
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+}
+
+.book-tile:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.13);
+}
+
+.book-tile-cover {
+    height: 120px;
+    background: var(--ink-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.75rem;
+    color: var(--gold);
+    padding: 0.5rem;
+    text-align: center;
+}
+
+.book-tile-meta {
+    padding: 0.65rem 0.75rem;
+}
+
+.book-tile-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.book-tile-author {
+    font-size: 0.7rem;
+    color: #6b6455;
+}
+
+/* ── Progress bar ── */
+
+.progress-bar {
+    height: 4px;
+    background: var(--parch-mid);
+    border-radius: 999px;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+    .dash-main {
+        grid-template-columns: 1fr;
+        height: auto;
+        overflow: visible;
+    }
+
+    .dash-sidebar {
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0.75rem;
+        gap: 0.5rem;
+    }
+
+    .sidebar-label { display: none; }
+
+    .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .dash-content { padding: 1rem; }
+    .stats-bar { grid-template-columns: 1fr 1fr; }
+}
