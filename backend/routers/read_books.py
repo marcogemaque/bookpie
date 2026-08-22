@@ -24,10 +24,14 @@ def create_read_books(read_book: ReadBookCreate, db:Session=Depends(get_db)):  #
 def get_read_books(db: Session = Depends(get_db)): # noqa: B008
     return db.query(ReadBooks).all()
 
-@router.post("/read_books/{read_book_id}/notes", response_model=NoteOut)
-def add_note_to_book(read_book_id: int,note: NoteCreate,db: Session = Depends(get_db)): # noqa: B008
-    db_note = Note(**note.model_dump(), read_book_id=read_book_id)
+@router.post("/read_books/{read_books_id}/notes", response_model=NoteOut)
+def add_note_to_book(read_books_id: int,note: NoteCreate,db: Session = Depends(get_db)): # noqa: B008
+    db_note = Note(**note.model_dump(), read_books_id=read_books_id)
     db.add(db_note)
     db.commit()
     db.refresh(db_note)
     return db_note
+
+@router.get("/read_books/{read_books_id}/notes", response_model=list[NoteOut])
+def get_all_notes_from_books(read_books_id: int, db: Session = Depends(get_db)):  # noqa: B008
+    return db.query(Note).filter(Note.read_books_id == read_books_id).all()

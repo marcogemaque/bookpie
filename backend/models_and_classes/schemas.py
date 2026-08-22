@@ -83,7 +83,7 @@ class NoteCreate(BaseModel):
 
 class NoteOut(BaseModel):
     note_id: int
-    read_book_id: int
+    read_books_id: int
     content: str
     created_at: datetime
 
