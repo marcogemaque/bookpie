@@ -37,4 +37,4 @@ app.include_router(read_books.router)
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"Bookpie": "API!"}

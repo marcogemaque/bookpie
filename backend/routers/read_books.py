@@ -1,8 +1,13 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from backend.models_and_classes.models import ReadBooks
-from backend.models_and_classes.schemas import ReadBookCreate, ReadBookOut
+from backend.models_and_classes.models import Note, ReadBooks
+from backend.models_and_classes.schemas import (
+    NoteCreate,
+    NoteOut,
+    ReadBookCreate,
+    ReadBookOut,
+)
 from backend.utils.dependencies import get_db
 
 router = APIRouter(prefix="/readBooks", tags=["readBooks"])
@@ -18,3 +23,11 @@ def create_read_books(read_book: ReadBookCreate, db:Session=Depends(get_db)):  #
 @router.get("/read_books", response_model=list[ReadBookOut])
 def get_read_books(db: Session = Depends(get_db)): # noqa: B008
     return db.query(ReadBooks).all()
+
+@router.post("/read_books/{read_book_id}/notes", response_model=NoteOut)
+def add_note_to_book(read_book_id: int,note: NoteCreate,db: Session = Depends(get_db)): # noqa: B008
+    db_note = Note(**note.model_dump(), read_book_id=read_book_id)
+    db.add(db_note)
+    db.commit()
+    db.refresh(db_note)
+    return db_note

@@ -8,8 +8,8 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 class BookBase(BaseModel):
     title: str
     cover_img: str | None = None
-    author: list
-    genre: list
+    author: list[str]
+    genre: list[str]
 
 class BookCreate(BookBase):
     pass
@@ -64,27 +64,27 @@ class Token(BaseModel):
 class ReadBookBase(BaseModel):
     user_id: int
     book_id: int
+    started: bool = False
+    finished: bool = False
+    started_date: datetime | None = None
+    finished_date: datetime | None = None
 
 class ReadBookCreate(ReadBookBase):
     pass
 
 class ReadBookOut(ReadBookBase):
     read_books_id: int
-    started: bool
-    finished: bool
-    started_date: datetime | None
-    finished_date: datetime | None
-    notes: list
+    notes: list = []
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 class NoteCreate(BaseModel):
     content: str = Field(max_length=250)
 
-class NoteOut(NoteCreate):
+class NoteOut(BaseModel):
     note_id: int
+    read_book_id: int
+    content: str
     created_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)

@@ -17,73 +17,14 @@
     <script type="text/babel">
         const { useState, useEffect } = React
 
-        function Nav({ username }) {
+        function Dashboard({ username }) {
             function handleLogout() {
                 localStorage.removeItem("token")
                 window.location.href = "./login.html"
             }
 
             return (
-                <nav className="dash-nav">
-                    <span className="brand">Book<em>worm</em></span>
-                    <div className="nav-actions">
-                        {username && <span className="nav-username">{username}</span>}
-                        <button className="btn-logout" onClick={handleLogout}>Log out</button>
-                    </div>
-                </nav>
-            )
-        }
-
-        function Sidebar({ active, onNavigate }) {
-            const links = [
-                { id: "home",      label: "Home" },
-                { id: "reading",   label: "Currently Reading" },
-                { id: "shelf",     label: "My Shelf" },
-                { id: "notes",     label: "Notes" },
-                { id: "discover",  label: "Discover" },
-            ]
-
-            return (
-                <aside className="dash-sidebar">
-                    <span className="sidebar-label">Menu</span>
-                    {links.map(link => (
-                        <button
-                            key={link.id}
-                            className={`sidebar-link${active === link.id ? " active" : ""}`}
-                            onClick={() => onNavigate(link.id)}
-                        >
-                            {link.label}
-                        </button>
-                    ))}
-                </aside>
-            )
-        }
-
-        function Dashboard() {
-            const [activePage, setActivePage] = useState("home")
-            const [username, setUsername] = useState(null)
-
-            useEffect(() => {
-                const token = localStorage.getItem("token")
-                if (!token) {
-                    window.location.href = "./login.html"
-                }
-                // TODO: decode token or fetch /users/me to get username
-            }, [])
-
-            return (
-                <div>
-                    <Nav username={username} />
-                    <div className="dash-main">
-                        <Sidebar active={activePage} onNavigate={setActivePage} />
-                        <main className="dash-content">
-                            {/* Page content goes here */}
-                            <p style={{ color: 'var(--ink)', fontFamily: 'Playfair Display, serif' }}>
-                                Welcome — you're on <strong>{activePage}</strong>.
-                            </p>
-                        </main>
-                    </div>
-                </div>
+                <p>Bookpie</p>
             )
         }
 
